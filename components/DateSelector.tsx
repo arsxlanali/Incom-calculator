@@ -5,14 +5,14 @@ import { Autocomplete, AutocompleteItem } from "@nextui-org/react";
 // import { getRecentYears } from "@/app/utils";
 
 interface Props {
-    years: any;
-    months: any;
+    years: Options;
+    months: Options;
 }
 
 export default function DateSelector({years, months}:Props) {
   return (
     <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-      <Autocomplete label="Select an Year" className="max-w-xs">
+      <Autocomplete label="Select an Year" className="max-w-xs pb-3">
         {years.map((year) => (
           <AutocompleteItem key={year.value} value={year.value}>
             {year.label}
@@ -22,12 +22,10 @@ export default function DateSelector({years, months}:Props) {
       <Autocomplete
         label="Select Month"
         className="max-w-xs"
-      >
-        {months.map((month) => (
-          <AutocompleteItem key={month.value} value={month.value}>
-            {month.label}
-          </AutocompleteItem>
-        ))}
+        defaultItems={months}
+        disabledKeys={[ "1","2"]}
+        >
+        {(item) => <AutocompleteItem key={item?.value}>{item?.label}</AutocompleteItem>}
       </Autocomplete>
     </div>
   );

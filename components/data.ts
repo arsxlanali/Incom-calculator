@@ -1,5 +1,4 @@
-import React from "react";
-export const months = [
+export const months: Options = [
     { label: "January", value: 1, description: "The first month of the year" },
     { label: "February", value: 2, description: "The second month of the year" },
     { label: "March", value: 3, description: "The third month of the year" },

@@ -1,4 +1,4 @@
-export const getRecentYears = () => {
+export const getRecentYears  = ():Options => {
     const currentYear = new Date().getFullYear();
     const recentYears = [];
   

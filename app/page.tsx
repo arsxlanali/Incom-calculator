@@ -5,9 +5,9 @@ import { button as buttonStyles } from "@nextui-org/theme";
 import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
 import { GithubIcon, AddIcon } from "@/components/icons";
-import DateSelector from "@/components/DateSelector";
-import { getRecentYears } from "./utils";
 import { months } from "@/components/data";
+import { getRecentYears } from "./utils";
+import RangeSelector from "@/components/RangeSelector";
 export default function Home() {
 	return (
 		<section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
@@ -23,13 +23,13 @@ export default function Home() {
 				</h2>
 			</div>
 			<div>
-				<DateSelector months={months} years={getRecentYears()}/>
+				<RangeSelector months={months} years={getRecentYears()}/>
 			</div>
 
 			<div className="flex gap-3">
 				<Link
 					isExternal
-					href={siteConfig.links.docs}
+					// href={siteConfig.links.docs}
 					className={buttonStyles({ color: "primary", radius: "full", variant: "shadow" })}
 				>
 					Calculate
