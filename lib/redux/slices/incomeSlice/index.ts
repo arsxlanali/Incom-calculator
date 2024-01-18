@@ -1,3 +1,3 @@
-export * from "./counterSlice";
+export * from "./incomeSlice";
 export * from "./thunks";
 export * from "./selectors";

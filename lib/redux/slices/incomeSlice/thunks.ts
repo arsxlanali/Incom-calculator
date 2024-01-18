@@ -2,7 +2,7 @@
 import { createAppAsyncThunk } from "@/lib/redux/createAppAsyncThunk";
 import { fetchIdentityCount } from "./fetchIdentityCount";
 import { selectCount } from "./selectors";
-import { counterSlice } from "./counterSlice";
+import { incomeSlice } from "./incomeSlice";
 import type { ReduxThunkAction } from "@/lib/redux";
 
 // The function below is called a thunk and allows us to perform async logic. It
@@ -28,6 +28,6 @@ export const incrementIfOddAsync =
     const currentValue = selectCount(getState());
 
     if (currentValue % 2 === 1) {
-      dispatch(counterSlice.actions.incrementByAmount(amount));
+      dispatch(incomeSlice.actions.incrementByAmount(amount));
     }
   };

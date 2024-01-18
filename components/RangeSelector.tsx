@@ -1,16 +1,35 @@
 import DateSelector from "./DateSelector";
-import { getRecentYears } from "@/app/utils";
-import { months } from "./data";
+import { CancelIcon } from "./icons";
+import { memo } from "react";
 
 interface Props {
-  years: Options;
-  months: Options;
+  number: number;
+  setCountArray: any;
 }
-export default function RangeSelector({years, months}: Props) {
+
+const RangeSelector: React.FC<Props> = memo(({ number, setCountArray }: Props) => {
   return (
-    <>
-      <DateSelector months={months} years={years} />
-      <DateSelector months={months} years={years} />
-    </>
+    <div className="flex flex-col items-end">
+      <CancelIcon
+        className="pb-1"
+        onClick={() =>
+          setCountArray((prevCountArray: []) => {
+            const newArray = [...prevCountArray];
+            newArray.splice(number, 1);
+            return newArray;
+          })
+        }
+      />
+      <DateSelector
+        fieldMonth={`toMonth${number}`}
+        fieldYear={`toYear${number}`}
+      />
+      <DateSelector
+        fieldMonth={`fromMonth${number}`}
+        fieldYear={`fromYear${number}`}
+      />
+    </div>
   );
-}
+});
+
+export default RangeSelector;

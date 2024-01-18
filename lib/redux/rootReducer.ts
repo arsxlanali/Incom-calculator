@@ -1,6 +1,6 @@
 /* Instruments */
-import { counterSlice } from "./slices";
+import { incomeSlice } from "./slices";
 
 export const reducer = {
-  counter: counterSlice.reducer,
+  income: incomeSlice.reducer,
 };
