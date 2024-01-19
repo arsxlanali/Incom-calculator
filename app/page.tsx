@@ -9,11 +9,13 @@ import { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { useId } from "react";
 import { generateYupValidationSchema } from "./utils";
+import { useSelector } from "@/lib/redux";
 
 export default function Home() {
   const [countArray, setCountArray] = useState([0]);
+  const {selectedOptions: values} = useSelector(state=> state.income)
   const [validationSchema, initialValues] = generateYupValidationSchema(
-    countArray.length + 1
+    countArray.length , values
   );
   return (
     <section>
@@ -22,7 +24,7 @@ export default function Home() {
         validationSchema={validationSchema}
         enableReinitialize
         onSubmit={(values) => {
-          console.log(values);
+        //   console.log(values);
         }}
       >
         <Form className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
@@ -39,10 +41,11 @@ export default function Home() {
           </div>
 
           <div>
-            {countArray.map((item) => (
+            {countArray.map((item, index) => (
               <RangeSelector
                 key={item}
-                number={item}
+                index={index}
+				length={countArray.length -1}
                 setCountArray={setCountArray}
               />
             ))}
@@ -64,9 +67,13 @@ export default function Home() {
                 variant: "bordered",
                 radius: "full",
               })}
-			  onClick={() => {
-				setCountArray((prevCountArray) => [...prevCountArray, prevCountArray.length + 1]);
-			  }}
+              onClick={() => {
+				// console.log("Hi",  countArray)
+                setCountArray((prevCountArray) => [
+                  ...prevCountArray,
+                  prevCountArray.length,
+                ]);
+              }}
             >
               Add Range
               <AddIcon size={20} />
