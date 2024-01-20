@@ -18,12 +18,14 @@ export const getRecentYears = (): Options => {
   return recentYears;
 };
 
-export const generateYupValidationSchema = (count: number): [YupValidationSchema, InitialState] => {
+export const generateYupValidationSchema = (
+  count: number,
+  values: SelectedOptions
+): [YupValidationSchema, InitialState] => {
   const validationSchema: YupValidationSchema = {};
-  const initialState: any = {}
+  const initialState: { [Key: string]: string } = {};
 
   for (let i = 0; i < count; i++) {
-
     validationSchema[`toYear${i}`] = Yup.string().required(
       "Please select a valid year"
     );
@@ -37,16 +39,16 @@ export const generateYupValidationSchema = (count: number): [YupValidationSchema
       "Please select a valid month"
     );
 
-    initialState[`toYear${i}`] = "";
-    initialState[`toMonth${i}`] = ""
-    initialState[`fromYear${i}`] = "";
-    initialState[`fromMonth${i}`] = "";
+    initialState[`toYear${i}`] = values[`toYear${i}`] ?? "";
+    initialState[`toMonth${i}`] = values[`toMonth${i}`] ?? "";
+    initialState[`fromYear${i}`] = values[`fromYear${i}`] ?? "";
+    initialState[`fromMonth${i}`] = values[`fromMonth${i}`] ?? "";
   }
 
   return [Yup.object().shape(validationSchema), initialState];
 };
 
-export const months: Options = [
+export const getMonths = (): Options => [
   { label: "January", value: 1, description: "The first month of the year" },
   { label: "February", value: 2, description: "The second month of the year" },
   { label: "March", value: 3, description: "The third month of the year" },
@@ -68,3 +70,43 @@ export const months: Options = [
     description: "The twelfth month of the year",
   },
 ];
+
+export const validateDateRanges = (data: SelectedOptions, index: number): DisableFields => {
+  const fromYear = parseInt(data[`fromYear${index}`]);
+  const fromMonth = parseInt(data[`fromMonth${index}`]);
+  const toYear = parseInt(data[`toYear${index}`]);
+  const toMonth = parseInt(data[`toMonth${index}`]);
+  const years = getRecentYears();
+  const months = getMonths();
+
+  let disablefromMonth: string[] = [];
+  let disablefromYear: string[] = [];
+
+  const disabletoYear = years
+    .map((year) => fromYear < year.value && `${year.value}`)
+    .filter((year) => typeof year === "string") as string[]
+  const disabletoMonth = months
+    .map(
+      (month) =>
+        toYear === fromYear && fromMonth >= month.value && `${month.value}`
+    )
+    .filter((month) => typeof month === "string")as string[]
+
+  if (index > 0) {
+    const prevToYear = parseInt(data[`toYear${index - 1}`]);
+    const prevToMonth = parseInt(data[`toMonth${index - 1}`]);
+    disablefromMonth = months
+      .map(
+        (month) =>
+          fromYear === prevToYear &&
+          prevToMonth >= month.value &&
+          `${month.value}`
+      )
+      .filter((month) => typeof month === "string") as string[]
+
+    disablefromYear = years
+      .map((year) => toYear < year.value && `${year.value}`)
+      .filter((year) => typeof year === "string") as string[]
+  }
+  return {disablefromMonth, disablefromYear, disabletoMonth, disabletoYear};
+};
