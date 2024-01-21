@@ -13,3 +13,29 @@ type InitialState = {
 }
 
 
+type CounterSliceState = {
+  value: number;
+  status: "idle" | "loading" | "failed";
+  years: Options;
+  months: Options;
+  isFieldSelected: boolean;
+  selectedOptions: SelectedOptions;
+  disabledKeys: DisableFields[];
+}
+
+type SetDisableAction = {
+  values: DisableFields;
+  index: number;
+}
+
+type DisableFields = {
+  disablefromMonth: string[];
+  disablefromYear: string [];
+  disabletoMonth: string [];
+  disabletoYear: string[];
+  [key: string]: string[]; // Add a string index signature
+};
+
+type SelectedOptions = {
+  [key: string]: Key;
+}
