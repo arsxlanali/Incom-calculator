@@ -71,7 +71,10 @@ export const getMonths = (): Options => [
   },
 ];
 
-export const validateDateRanges = (data: SelectedOptions, index: number): DisableFields => {
+export const validateDateRanges = (
+  data: SelectedOptions,
+  index: number
+): DisableFields => {
   const fromYear = parseInt(data[`fromYear${index}`]);
   const fromMonth = parseInt(data[`fromMonth${index}`]);
   const toYear = parseInt(data[`toYear${index}`]);
@@ -83,14 +86,14 @@ export const validateDateRanges = (data: SelectedOptions, index: number): Disabl
   let disablefromYear: string[] = [];
 
   const disabletoYear = years
-    .map((year) => fromYear < year.value && `${year.value}`)
-    .filter((year) => typeof year === "string") as string[]
+    .map((year) => fromYear > year.value && `${year.value}`)
+    .filter((year) => typeof year === "string") as string[];
   const disabletoMonth = months
     .map(
       (month) =>
         toYear === fromYear && fromMonth >= month.value && `${month.value}`
     )
-    .filter((month) => typeof month === "string")as string[]
+    .filter((month) => typeof month === "string") as string[];
 
   if (index > 0) {
     const prevToYear = parseInt(data[`toYear${index - 1}`]);
@@ -102,11 +105,28 @@ export const validateDateRanges = (data: SelectedOptions, index: number): Disabl
           prevToMonth >= month.value &&
           `${month.value}`
       )
-      .filter((month) => typeof month === "string") as string[]
+      .filter((month) => typeof month === "string") as string[];
 
     disablefromYear = years
       .map((year) => toYear < year.value && `${year.value}`)
-      .filter((year) => typeof year === "string") as string[]
+      .filter((year) => typeof year === "string") as string[];
+  } else {
+    disablefromMonth = months
+      .map(
+        (month) =>
+          fromYear === toYear && toMonth <= month.value && `${month.value}`
+      )
+      .filter((month) => typeof month === "string") as string[];
+
+    disablefromYear = years
+      .map((year) => toYear > year.value && `${year.value}`)
+      .filter((year) => typeof year === "string") as string[];
   }
-  return {disablefromMonth, disablefromYear, disabletoMonth, disabletoYear};
+  console.log("FromYear", disablefromYear, disablefromMonth)
+  return {
+    [`dfromMonth${index}`]: disablefromMonth,
+    [`dfromYear${index}`]: disablefromYear,
+    [`dtoMonth${index}`]: disabletoMonth,
+    [`dtoYear${index}`]: disabletoYear,
+  };
 };
