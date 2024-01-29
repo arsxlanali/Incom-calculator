@@ -1,5 +1,5 @@
 /* Core */
-import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction, current } from "@reduxjs/toolkit";
 import { getRecentYears, getMonths } from "@/app/utils";
 
 /* Instruments */
@@ -31,7 +31,10 @@ export const incomeSlice = createSlice({
       state.selectedOptions = action.payload;
     },
     setDisableKeys: (state, action: PayloadAction<SetDisableAction>) => {
-      state.disabledKeys = {...action.payload, ...state.disabledKeys};
+
+      state.disabledKeys = { ...state.disabledKeys, ...action.payload};
+      // console.log( action.payload, state.disabledKeys)
+
     },
     // addDiableKeys: (state) => {
     //   state.disabledKeys = {
