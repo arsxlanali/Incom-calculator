@@ -16,9 +16,9 @@ import {
   
   export const reduxStore = configureStore({
     reducer,
-    middleware: (getDefaultMiddleware) => {
-      return getDefaultMiddleware().concat(middleware);
-    },
+    // middleware: (getDefaultMiddleware) => {
+    //   return getDefaultMiddleware().concat(middleware);
+    // },
   });
   export const useDispatch = () => useReduxDispatch<ReduxDispatch>();
   export const useSelector: TypedUseSelectorHook<ReduxState> = useReduxSelector;
