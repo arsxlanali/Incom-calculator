@@ -8,14 +8,16 @@ import { Form, Formik } from "formik";
 import { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { useId } from "react";
-import { generateYupValidationSchema } from "./utils";
-import { useSelector } from "@/lib/redux";
+import { generateYupValidationSchema, validateDateRanges } from "./utils";
+import { useDispatch, useSelector } from "@/lib/redux";
 
 export default function Home() {
+  const dispatch = useDispatch();
   const [countArray, setCountArray] = useState([0]);
-  const {selectedOptions: values} = useSelector(state=> state.income)
+  const { selectedOptions: values } = useSelector((state) => state.income);
   const [validationSchema, initialValues] = generateYupValidationSchema(
-    countArray.length , values
+    countArray.length,
+    values
   );
   return (
     <section>
@@ -24,7 +26,7 @@ export default function Home() {
         validationSchema={validationSchema}
         enableReinitialize
         onSubmit={(values) => {
-        //   console.log(values);
+          //   console.log(values);
         }}
       >
         <Form className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
@@ -45,7 +47,7 @@ export default function Home() {
               <RangeSelector
                 key={item}
                 index={index}
-				length={countArray.length -1}
+                length={countArray.length - 1}
                 setCountArray={setCountArray}
               />
             ))}
@@ -68,11 +70,15 @@ export default function Home() {
                 radius: "full",
               })}
               onClick={() => {
-				// console.log("Hi",  countArray)
                 setCountArray((prevCountArray) => [
                   ...prevCountArray,
                   prevCountArray.length,
                 ]);
+                const valid = validateDateRanges(values, countArray.length)
+                console.log("JKJK", valid);
+                
+                // dispatch(addDiableKeys());
+                // dispatch(setSelected(true));
               }}
             >
               Add Range
