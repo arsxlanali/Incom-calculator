@@ -100,16 +100,27 @@ export const validateDateRanges = (
     const prevToMonth = parseInt(data[`toMonth${index - 1}`]);
     disablefromMonth = months
       .map(
-        (month) =>
-          fromYear === prevToYear &&
-          prevToMonth >= month.value &&
-          `${month.value}`
+        (month) => {
+
+          // console.log("Year", month);
+          if (fromYear === prevToYear) {
+            return prevToMonth >= month.value && `${month.value}`;
+          } else {
+            return prevToMonth >= month.value && `${month.value}`;
+          }
+        }
+         
       )
       .filter((month) => typeof month === "string") as string[];
 
     disablefromYear = years
-      .map((year) => toYear < year.value && `${year.value}`)
+      .map((year) => {
+        console.log("Year", year, toYear);
+        
+       return prevToYear > year.value && `${year.value}`})
       .filter((year) => typeof year === "string") as string[];
+      console.log("Reached", prevToYear, prevToMonth, disablefromMonth, disablefromYear);
+      
   } else {
     disablefromMonth = months
       .map(
@@ -119,10 +130,10 @@ export const validateDateRanges = (
       .filter((month) => typeof month === "string") as string[];
 
     disablefromYear = years
-      .map((year) => toYear > year.value && `${year.value}`)
+      .map((year) => toYear < year.value && `${year.value}`)
       .filter((year) => typeof year === "string") as string[];
   }
-  console.log("FromYear", disablefromYear, disablefromMonth)
+  // console.log("FromYear", disablefromYear, disablefromMonth)
   return {
     [`dfromMonth${index}`]: disablefromMonth,
     [`dfromYear${index}`]: disablefromYear,
