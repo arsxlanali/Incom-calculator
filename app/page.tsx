@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { useId } from "react";
 import { generateYupValidationSchema, validateDateRanges } from "./utils";
-import { useDispatch, useSelector } from "@/lib/redux";
+import { setDisableKeys, useDispatch, useSelector } from "@/lib/redux";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -76,6 +76,7 @@ export default function Home() {
                 ]);
                 const valid = validateDateRanges(values, countArray.length)
                 console.log("JKJK", valid);
+                dispatch(setDisableKeys(valid))
                 
                 // dispatch(addDiableKeys());
                 // dispatch(setSelected(true));
