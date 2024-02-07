@@ -38,12 +38,18 @@ export const generateYupValidationSchema = (
     validationSchema[`fromMonth${i}`] = Yup.string().required(
       "Please select a valid month"
     );
+    validationSchema[`pay${i}`] = Yup.number().required(
+      "Please select a valid pay"
+    );
 
     initialState[`toYear${i}`] = values[`toYear${i}`] ?? "";
     initialState[`toMonth${i}`] = values[`toMonth${i}`] ?? "";
     initialState[`fromYear${i}`] = values[`fromYear${i}`] ?? "";
     initialState[`fromMonth${i}`] = values[`fromMonth${i}`] ?? "";
+    initialState[`pay${i}`] = values[`pay${i}`] ?? undefined;
+
   }
+
 
   return [Yup.object().shape(validationSchema), initialState];
 };
