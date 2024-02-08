@@ -10,6 +10,7 @@ import * as Yup from "yup";
 import { useId } from "react";
 import { generateYupValidationSchema, validateDateRanges } from "./utils";
 import { setDisableKeys, useDispatch, useSelector } from "@/lib/redux";
+import SliderComponent from "@/components/Slider";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ export default function Home() {
     values
   );
   return (
-    <section>
+    <section className="flex justify-center">
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -29,7 +30,7 @@ export default function Home() {
           //   console.log(values);
         }}
       >
-        <Form className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
+        <Form className="flex flex-col justify-center gap-4 py-8 md:py-10 w-96">
           <div className="inline-block max-w-lg text-center justify-center">
             <h1 className={title()}>Make&nbsp;</h1>
             <h1 className={title({ color: "violet" })}>beautiful&nbsp;</h1>
@@ -52,8 +53,11 @@ export default function Home() {
               />
             ))}
           </div>
+          <div className="flex">
+            <SliderComponent />
+          </div>
 
-          <div className="flex gap-3">
+          <div className="flex gap-3 justify-center">
             <Button
               type="submit"
               className={buttonStyles({

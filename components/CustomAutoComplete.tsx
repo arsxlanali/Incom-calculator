@@ -34,7 +34,7 @@ const CustomAutocomplete: React.FC<AutocompleteProps> = ({
     <Autocomplete
       size="sm"
       label={label}
-      className="max-w-xs pb-3 w-32"
+      className="pb-3"
       defaultItems={items}
       // isDisabled={ field.slice(0,2) === "to" ? isFieldSelected : false}
       isClearable={false}
