@@ -27,16 +27,16 @@ export const generateYupValidationSchema = (
 
   for (let i = 0; i < count; i++) {
     validationSchema[`toYear${i}`] = Yup.string().required(
-      "Please select a valid year"
+      "Please select a year"
     );
     validationSchema[`toMonth${i}`] = Yup.string().required(
-      "Please select a valid month"
+      "Please select a month"
     );
     validationSchema[`fromYear${i}`] = Yup.string().required(
-      "Please select a valid year"
+      "Please select a year"
     );
     validationSchema[`fromMonth${i}`] = Yup.string().required(
-      "Please select a valid month"
+      "Please select a month"
     );
     validationSchema[`pay${i}`] = Yup.number().required(
       "Please select a valid pay"
