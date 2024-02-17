@@ -15,6 +15,7 @@ const initialState: CounterSliceState = {
     toMonth0: "",
     fromYear0: "",
     fromMonth0: "",
+    price0: undefined,
   },
   // isFieldSelected: true,
   disabledKeys: 
@@ -35,6 +36,11 @@ export const incomeSlice = createSlice({
       state.disabledKeys = { ...state.disabledKeys, ...action.payload};
       // console.log( action.payload, state.disabledKeys)
 
+    },
+    updatePrice: (state, action) => {
+      const { index, value } = action.payload;
+      // Assuming you want to update price for the selectedOptions0
+      state.selectedOptions[`price${index}`] = value;
     },
     // addDiableKeys: (state) => {
     //   state.disabledKeys = {
@@ -62,5 +68,5 @@ export const incomeSlice = createSlice({
   // },
 });
 
-export const { setOptions, setDisableKeys } =
+export const { setOptions, setDisableKeys, updatePrice } =
   incomeSlice.actions;
