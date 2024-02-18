@@ -2,7 +2,7 @@ import { useField, useFormikContext } from "formik";
 import DateSelector from "./DateSelector";
 import { CancelIcon } from "./icons";
 import { memo, useState } from "react";
-import { setOptions, useDispatch, useSelector } from "@/lib/redux";
+import { setOptions, updatePrice, useDispatch, useSelector } from "@/lib/redux";
 import { validateDateRanges } from "@/app/utils";
 import {useTheme} from "next-themes";
 import { Input } from "@nextui-org/input";
@@ -61,6 +61,12 @@ const RangeSelector: React.FC<Props> = memo(
           size="sm"
           min="1"
           placeholder="0.00"
+          onChange={(e)=> {
+            console.log("JKJ", e.target.value);
+            dispatch(updatePrice({index, value: e.target.value}))
+            
+            fieldProps.onChange(e)
+          }}
           // labelPlacement="outside"
           startContent={
             <div className="pointer-events-none flex items-center">
