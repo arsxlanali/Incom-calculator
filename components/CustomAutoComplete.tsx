@@ -22,7 +22,7 @@ const CustomAutocomplete: React.FC<AutocompleteProps> = ({
 }) => {
   const [fieldProps, meta, helper] = useField(field);
   // const [disabledKeys, setDisabledKeys] = useState<string[]>([])
-  const { disabledKeys: disalbed } = useSelector(state=> state.income)
+  const { disabledKeys: disalbed, selectedOptions } = useSelector(state=> state.income)
 
   const dispatch = useDispatch()
   const formik = useFormikContext<SelectedOptions>(); // Access the Formik context
@@ -44,9 +44,13 @@ const CustomAutocomplete: React.FC<AutocompleteProps> = ({
       selectedKey={fieldProps.value}
       onSelectionChange={(selectedKey) => {
         helper.setValue(selectedKey?.toString());
-        const selectedValues = {...formik.values, [field]: selectedKey}
+
+        const selectedValues = {...selectedOptions, [field]: selectedKey}
+
+        // console.log("JJJ", formik.values);
+        
         const disableKeys = {...validateDateRanges(selectedValues, index)}
-        console.log("HI", disableKeys);
+        // console.log("HI", disableKeys, formik.values);
         
         dispatch(setOptions(selectedValues))
         dispatch(setDisableKeys(disableKeys))
