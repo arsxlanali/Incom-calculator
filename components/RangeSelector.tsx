@@ -4,7 +4,7 @@ import { CancelIcon } from "./icons";
 import { memo, useState } from "react";
 import { setOptions, updatePrice, useDispatch, useSelector } from "@/lib/redux";
 import { validateDateRanges } from "@/app/utils";
-import {useTheme} from "next-themes";
+import { useTheme } from "next-themes";
 import { Input } from "@nextui-org/input";
 
 interface Props {
@@ -17,9 +17,10 @@ const RangeSelector: React.FC<Props> = memo(
   ({ index, length, setCountArray }: Props) => {
     const formik = useFormikContext<SelectedOptions>();
     const [fieldProps, meta, helper] = useField(`pay${index}`);
-    const {resolvedTheme:theme} = useTheme()
+    const { resolvedTheme: theme } = useTheme();
     console.log("Theme", theme);
-    
+
+    const {selectedOptions} = useSelector((state=> state.income))
     // const [slected, setSelected] = useState()
     const dispatch = useDispatch();
     const {
@@ -27,19 +28,28 @@ const RangeSelector: React.FC<Props> = memo(
       [`fromYear${index}`]: _fromYear,
       [`toMonth${index}`]: _toMonth,
       [`toYear${index}`]: _toYear,
+      [`pay${index}`]: _pay,
       ...rest
-    } = formik.values;
+    } = selectedOptions;
+
+
+    console.log("Hi", rest);
+    
 
     return (
-      <div className={`flex flex-col items-end bg-slate-300 p-4 mt-4 rounded-lg ${theme !== 'dark' && theme !== undefined ? 'bg-opacity-100' : 'bg-opacity-10'}`}>
+      <div
+        className={`flex flex-col items-end bg-slate-300 p-4 mt-4 rounded-lg ${
+          theme !== "dark" && theme !== undefined
+            ? "bg-opacity-100"
+            : "bg-opacity-10"
+        }`}
+      >
         {length === index && index !== 0 && (
           <CancelIcon
             className="pb-1"
             onClick={() => {
               dispatch(setOptions(rest));
-              setCountArray((prevCountArray: []) => [
-                ...Array(prevCountArray.length - 1).keys(),
-              ]);
+              setCountArray((prevCountArray: []) => prevCountArray.slice(0, -1));
             }}
           />
         )}
@@ -61,11 +71,12 @@ const RangeSelector: React.FC<Props> = memo(
           size="sm"
           min="1"
           placeholder="0.00"
-          onChange={(e)=> {
-            console.log("JKJ", e.target.value);
-            dispatch(updatePrice({index, value: e.target.value}))
-            
-            fieldProps.onChange(e)
+          onChange={(e) => {
+            helper.setValue(e.target.value?.toString());
+
+            dispatch(updatePrice({ index, value: e.target.value }));
+
+            fieldProps.onChange(e);
           }}
           // labelPlacement="outside"
           startContent={
