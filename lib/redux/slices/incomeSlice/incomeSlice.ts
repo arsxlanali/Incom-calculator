@@ -15,7 +15,7 @@ const initialState: CounterSliceState = {
     toMonth0: "",
     fromYear0: "",
     fromMonth0: "",
-    price0: undefined,
+    price0: "",
   },
   // isFieldSelected: true,
   disabledKeys: 
