@@ -31,11 +31,6 @@ const RangeSelector: React.FC<Props> = memo(
       [`pay${index}`]: _pay,
       ...rest
     } = selectedOptions;
-
-
-    console.log("Hi", rest);
-    
-
     return (
       <div
         className={`flex flex-col items-end bg-slate-300 p-4 mt-4 rounded-lg ${
