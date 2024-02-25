@@ -33,7 +33,7 @@ export default function Home() {
         <Form className="flex flex-col justify-center gap-4 py-8 md:py-10 w-96">
           <div className="inline-block max-w-lg text-center justify-center">
             <h1 className={title()}>Make&nbsp;</h1>
-            <h1 className={title({ color: "violet" })}>beautiful&nbsp;</h1>
+            <h1 className={title({ color: "violet" })}>Income Calculator&nbsp;</h1>
             <br />
             {/* <h1 className={title()}>
           websites regardles of your design experience.
