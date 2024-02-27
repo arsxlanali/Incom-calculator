@@ -27,22 +27,16 @@ export default function Home() {
         validationSchema={validationSchema}
         enableReinitialize
         onSubmit={(values) => {
-          //   console.log(values);
+          console.log(values);
         }}
       >
         <Form className="flex flex-col justify-center gap-4 py-8 md:py-10 w-96">
           <div className="inline-block max-w-lg text-center justify-center">
-            <h1 className={title()}>Make&nbsp;</h1>
-            <h1 className={title({ color: "violet" })}>Income Calculator&nbsp;</h1>
+            <h1 className={title({ color: "violet" })}>
+              Income Calculator&nbsp;
+            </h1>
             <br />
-            {/* <h1 className={title()}>
-          websites regardles of your design experience.
-        </h1>
-        <h2 className={subtitle({ class: "mt-4" })}>
-          Beautiful, fast and modern React UI library.
-        </h2> */}
           </div>
-
           <div>
             {countArray.map((item, index) => (
               <RangeSelector
@@ -78,10 +72,10 @@ export default function Home() {
                   ...prevCountArray,
                   prevCountArray.length,
                 ]);
-                const valid = validateDateRanges(values, countArray.length)
+                const valid = validateDateRanges(values, countArray.length);
                 console.log("JKJK", valid);
-                dispatch(setDisableKeys(valid))
-                
+                dispatch(setDisableKeys(valid));
+
                 // dispatch(addDiableKeys());
                 // dispatch(setSelected(true));
               }}
