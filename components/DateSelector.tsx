@@ -14,7 +14,7 @@ export default function DateSelector({fieldMonth, fieldYear, index}: Props) {
   const { years, months } = useSelector((state) => state.income);
 
   return (
-    <div className="flex w-full flex-wrap md:flex-nowrap">
+    <div className="flex w-full flex-wrap md:flex-nowrap  md:gap-3">
       <CustomAutocomplete label="Select a Year" items={years} field={fieldYear} index={index}/>
       <CustomAutocomplete label="Select a Month" items={months} field={fieldMonth} index={index}/>
     </div>
