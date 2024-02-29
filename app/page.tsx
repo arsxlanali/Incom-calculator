@@ -73,11 +73,7 @@ export default function Home() {
                   prevCountArray.length,
                 ]);
                 const valid = validateDateRanges(values, countArray.length);
-                console.log("JKJK", valid);
                 dispatch(setDisableKeys(valid));
-
-                // dispatch(addDiableKeys());
-                // dispatch(setSelected(true));
               }}
             >
               Add Range
