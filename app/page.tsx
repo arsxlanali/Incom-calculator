@@ -11,6 +11,7 @@ import { useId } from "react";
 import { generateYupValidationSchema, validateDateRanges } from "./utils";
 import { setDisableKeys, useDispatch, useSelector } from "@/lib/redux";
 import SliderComponent from "@/components/Slider";
+import ResultTable from "@/components/ResultTable";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -82,6 +83,9 @@ export default function Home() {
           </div>
         </Form>
       </Formik>
+      <div>
+      <ResultTable/>
+      </div>
     </section>
   );
 }

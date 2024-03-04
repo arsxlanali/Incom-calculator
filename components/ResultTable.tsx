@@ -43,7 +43,7 @@ const columns = [
   },
 ];
 
-export default function App() {
+export default function ResultTable() {
   return (
     <Table aria-label="Example table with dynamic content">
       <TableHeader columns={columns}>
