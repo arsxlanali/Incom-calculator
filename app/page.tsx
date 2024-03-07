@@ -22,7 +22,7 @@ export default function Home() {
     values
   );
   return (
-    <section className="flex justify-center">
+    <section className="flex justify-center flex-col">
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
