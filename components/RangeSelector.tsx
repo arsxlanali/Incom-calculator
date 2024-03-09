@@ -21,7 +21,6 @@ const RangeSelector: React.FC<Props> = memo(
     console.log("Theme", theme);
 
     const {selectedOptions} = useSelector((state=> state.income))
-    // const [slected, setSelected] = useState()
     const dispatch = useDispatch();
     const {
       [`fromMonth${index}`]: _fromMonth,
