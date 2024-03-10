@@ -1,17 +1,15 @@
 "use client";
 import RangeSelector from "@/components/RangeSelector";
+import ResultTable from "@/components/ResultTable";
+import SliderComponent from "@/components/Slider";
 import { AddIcon } from "@/components/icons";
 import { title } from "@/components/primitives";
+import { setDisableKeys, useDispatch, useSelector } from "@/lib/redux";
 import { Button } from "@nextui-org/button";
 import { button as buttonStyles } from "@nextui-org/theme";
 import { Form, Formik } from "formik";
-import { useEffect, useState } from "react";
-import * as Yup from "yup";
-import { useId } from "react";
+import { useState } from "react";
 import { generateYupValidationSchema, validateDateRanges } from "./utils";
-import { setDisableKeys, useDispatch, useSelector } from "@/lib/redux";
-import SliderComponent from "@/components/Slider";
-import ResultTable from "@/components/ResultTable";
 
 export default function Home() {
   const dispatch = useDispatch();
