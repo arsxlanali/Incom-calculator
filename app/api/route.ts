@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 // To handle a GET request to /api
 export async function POST(request: Request) {
   try {
-    const response = await fetch('https://api.exchangeratesapi.io/v1/latest?access_key=API_KEY&base=USD');
+    const response = await fetch('https://api.exchangeratesapi.io/v1/latest?access_key=tJjxZRSJh8puMeLo&base=USD');
     
     if (!response.ok) {
       throw new Error('Network response was not ok');
