@@ -28,10 +28,6 @@ type SetDisableAction = {
 }
 
 type DisableFields = {
-  // disablefromMonth: string[];
-  // disablefromYear: string [];
-  // disabletoMonth: string [];
-  // disabletoYear: string[];
   [key: string]: string[]; // Add a string index signature
 };
 
