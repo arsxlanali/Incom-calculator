@@ -27,7 +27,6 @@ const CustomAutocomplete: React.FC<AutocompleteProps> = ({
   const dispatch = useDispatch()
   const formik = useFormikContext<SelectedOptions>(); // Access the Formik context
 
-  // console.log("JKJK", `d${field}`,disalbed[`d${field}`]);
   
 
   return (
